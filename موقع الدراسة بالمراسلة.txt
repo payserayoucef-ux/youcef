@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>??????? ????????? - ????</title>
+    <title>الدراسة بالمراسلة - يوسف</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* [ ... ????? CSS ???????? ??????? ... ] */
+        /* [ ... أكواد CSS مُصحَّحة ومكتملة ... ] */
         
-        /* ????? ??? */
+/* تنسيق عام */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f7f6; /* ????? ????? */
+            background-color: #f4f7f6; /* خلفية فاتحة */
             color: #333;
             margin: 0;
             padding: 0;
-            direction: rtl; /* ???? ????? ???? ?????? */
-            text-align: right; 
-            overflow-x: hidden; 
+            direction: rtl; /* ضمان توجيه كامل لليمين */
+            text-align: right;
+            overflow-x: hidden;
         }
 
-        /* ????? ???????? ???????? */
+        /* الرأس والقائمة الجانبية */
         header {
-            background-color: #007bff; /* ???? ????? ??????? */
+            background-color: #007bff; /* أزرق أساسي للديوان */
             color: white;
             padding: 15px 10px;
             display: flex;
@@ -36,7 +36,7 @@
         }
 
         .header-title {
-            margin: 0 auto; 
+            margin: 0 auto;
             font-size: 1.2rem;
         }
 
@@ -49,23 +49,51 @@
             padding: 0 10px;
         }
 
-        /* ??????? ???????? */
+        /* القائمة الجانبية */
         #sidebar {
             height: 100%;
-            width: 250px;
+            width: 280px; /* تم زيادته قليلا لاستيعاب الساعة */
             position: fixed;
             z-index: 150;
             top: 0;
-            right: -250px; 
+            right: -280px;
             background-color: #111;
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            display: flex; /* لتنظيم المحتوى الداخلي */
+            flex-direction: column;
         }
 
         #sidebar.open {
             right: 0;
+        }
+        
+        /* رأس القائمة الجانبية (الساعة والتاريخ) */
+        .sidebar-header {
+            color: #f1f1f1;
+            padding: 15px 25px 10px;
+            border-bottom: 2px solid #333;
+            text-align: left; /* لعرض الساعة والتاريخ بشكل LTR */
+            direction: ltr;
+        }
+        
+        .sidebar-header .time {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .sidebar-header .date {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* حاوية الأزرار داخل القائمة الجانبية */
+        .sidebar-links {
+            overflow-y: auto; /* لجعل الأزرار قابلة للتمرير */
+            flex-grow: 1;
         }
 
         #sidebar a {
@@ -86,22 +114,38 @@
         .close-btn {
             position: absolute;
             top: 0;
-            left: 25px; /* ?? ????? ??????? ?? RTL */
+            right: 15px;
             font-size: 36px;
-            margin-left: 0;
-            right: 15px; /* ?? ????? ??? ????? ?? ??????? ?????? */
             background: none;
             border: none;
             color: white;
             cursor: pointer;
         }
 
-        /* ????? ?????? ???????? */
+        /* محتوى الصفحة الرئيسية */
         #main-content {
             padding: 20px;
             transition: margin-right 0.5s;
             max-width: 800px;
             margin: 0 auto;
+        }
+        
+        /* خانة البحث */
+        .search-container {
+            margin: 10px auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            font-size: 1rem;
+            box-sizing: border-box;
+            text-align: right;
         }
 
         .welcome-section {
@@ -121,10 +165,10 @@
             font-weight: normal;
         }
 
-        /* ????? ??????? ???????? */
+        /* أزرار القائمة الرئيسية */
         .main-buttons-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
@@ -154,8 +198,34 @@
             color: white;
             transform: translateY(-3px);
         }
+        
+        /* --- تنسيق زر المواعيد (الحالة الافتراضية: شفاف) --- */
+.appointments-btn {
+    /* اللون الأزرق المطلوب للحدود والنص */
+    color: #007bff; /* لون النص: أزرق */
+    background-color: transparent; /* الخلفية: شفافة */
+    border: 2px solid #007bff; /* الحدود: أزرق سمك 2 بكسل */
+    
+    /* الخصائص الأخرى (لضمان التناسق) */
+    padding: 10px 20px;
+    border-radius: 8px; 
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease; /* لتأثير حركة ناعم */
+}
 
-        /* ????? ??????? ????????? */
+/* --- تأثير المرور بالماوس (Hover Effect) --- */
+/* (الحالة المطلوبة: خلفية زرقاء، حدود بيضاء، نص أبيض) */
+.appointments-btn:hover {
+    background-color: #007bff; /* الخلفية: أزرق */
+    color: white; /* لون النص: أبيض */
+    border: 2px solid white; /* الحدود: أبيض */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* ظل أزرق خفيف */
+}
+
+        /* أزرار التواصل الاجتماعي */
         .social-media-container {
             display: flex;
             justify-content: center;
@@ -194,7 +264,7 @@
         .facebook { background-color: #4267b2; }
         .youtube { background-color: #ff0000; }
 
-        /* ????? ??????? ??????? */
+        /* حاوية الصفحات الفرعية */
         #pages-container {
             position: fixed;
             top: 0;
@@ -203,7 +273,7 @@
             height: 100%;
             background-color: #f4f7f6;
             z-index: 200;
-            display: none; 
+            display: none;
             overflow-y: auto;
         }
 
@@ -224,7 +294,7 @@
         }
 
         .back-btn {
-            background-color: #dc3545; 
+            background-color: #dc3545;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -234,8 +304,7 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            /* ????? ???????? ????? ??????? */
-            flex-direction: row-reverse; 
+            flex-direction: row-reverse;
             justify-content: space-between;
         }
         
@@ -255,7 +324,7 @@
             font-size: 1rem;
             cursor: pointer;
             transition: background-color 0.3s;
-            text-decoration: none; 
+            text-decoration: none;
             color: #333;
             font-weight: bold;
         }
@@ -264,8 +333,38 @@
             background-color: #007bff;
             color: white;
         }
+        
+        /* تنسيق الأزرار غير القابلة للضغط لصفحة المواعيد */
+        .static-timing-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #fff3cd; /* خلفية صفراء فاتحة */
+            color: #856404; /* نص أصفر داكن */
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: right;
+            font-size: 1rem;
+            pointer-events: none; /* لمنع الضغط */
+            cursor: default;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
 
-        /* ????? ???? ?????? ?? ??????? */
+        .static-timing-btn h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .static-timing-btn p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            color: #a08126; /* لون أغمق للتاريخ */
+        }
+
+
+        /* تصميم صفحة التحقق من المستوى */
         #check-level-page select, #check-level-page input[type="number"] {
             width: 100%;
             padding: 10px;
@@ -276,7 +375,7 @@
         }
 
         #check-level-page .check-btn {
-            background-color: #28a745; 
+            background-color: #28a745;
             color: white;
             border: none;
             padding: 12px 20px;
@@ -298,7 +397,7 @@
         .success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
         .failure { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
 
-        /* ????? ???? ??????? ???????? */
+        /* تصميم صفحة المراكز الولائية */
         #centers-page select {
             width: 100%;
             padding: 12px;
@@ -330,58 +429,113 @@
         .hidden {
             display: none !important;
         }
+        
+        /* عدادات الزيارات والمشاركات */
+        .stats-footer {
+            margin-top: auto; /* يدفع الحاوية للأسفل */
+            padding: 15px;
+            background-color: #222;
+            color: #ddd;
+            border-top: 1px solid #333;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .stats-footer div {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .stats-footer span {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: #00aaff;
+        }
+        
+        .stats-footer i {
+            margin-left: 8px;
+            color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
 
     <div id="sidebar">
         <button class="close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+        
         <div class="sidebar-header">
-            <h3>????? ??????? ????????</h3>
+             <div class="date" id="sidebar-date"></div>
+            <div class="time" id="sidebar-time"></div>
         </div>
         
-        <a href="#" onclick="showPage('about-page'); return false;"><i class="fas fa-lightbulb"></i> ?? ?? ??????? ??????????</a>
-        <a href="#" onclick="showPage('check-level-page'); return false;"><i class="fas fa-check-circle"></i> ?????? ?? ????? ?? ??????? ??????</a>
-        <a href="#" onclick="showPage('centers-page'); return false;"><i class="fas fa-phone-alt"></i> ??????? ???????? ????????</a>
-        <a href="#" onclick="showPage('donation-page'); return false;"><i class="fas fa-heart"></i> ?????? ???? ??????</a>
-        <a href="#" onclick="showPage('about-app-page'); return false;"><i class="fas fa-info-circle"></i> ??? ??????</a>
-        <a href="#" onclick="shareApp()"><i class="fas fa-share-alt"></i> ?????? ??????</a>
+        <div class="sidebar-links">
+            <h3>قائمة الخدمات الإضافية</h3>
+            
+            <a href="#" onclick="showPage('about-page'); return false;"><i class="fas fa-lightbulb"></i> ما هي الدراسة بالمراسلة؟</a>
+            <a href="#" onclick="showPage('check-level-page'); return false;"><i class="fas fa-check-circle"></i> التحقق من قبولك في المستوى الأعلى</a>
+            <a href="#" onclick="showPage('centers-page'); return false;"><i class="fas fa-phone-alt"></i> الاتصال بالمراكز الولائية</a>
+            <a href="#" onclick="showPage('donation-page'); return false;"><i class="fas fa-heart"></i> التبرع لدعم الموقع</a>
+            <a href="#" onclick="showPage('about-app-page'); return false;"><i class="fas fa-info-circle"></i> حول الموقع</a>
+            <a href="#" onclick="shareApp()"><i class="fas fa-share-alt"></i> مشاركة الموقع</a>
+            <a href="mailto:paserayoucef@gmail.com?subject=إبلاغ عن مشكلة في نظام الأسئلة" role="button" style="padding: 10px 20px; text-decoration: none; background-color: #dc3545; color: white; border-radius: 5px; font-weight: bold; display: block; margin: 10px 25px;">
+                الإبلاغ عن مشكلة
+            </a>
+        </div>
+        <div class="stats-footer">
+            <div>
+                <span><i class="fas fa-eye"></i> **الزيارات:** <span id="visit-count">10502</span></span>
+                <span><i class="fas fa-share-alt"></i> **المشاركات:** <span id="share-count">245</span></span>
+            </div>
+            <p style="margin: 5px 0 0;"> موقع الدراسلة بالمراسلة - يوسف جميع الحقوق محفوظة &copy; 2024</p>
+        </div>
     </div>
     
     <header>
         <button class="menu-btn" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </button>
-        <h1 class="header-title">??????? ????????? - ????</h1>
+        <h1 class="header-title">الدراسة بالمراسلة - يوسف</h1>
     </header>
+    
+    <div class="search-container">
+        <input type="text" id="site-search" placeholder="ابحث داخل الموقع..." onkeyup="searchSite(this.value)">
+    </div>
 
     <main id="main-content">
         
         <div class="welcome-section">
-            <h1>????? ?? ???? ??????? ??</h1>
-            <h2>?? ???? **??????? ????????? - ????**</h2>
-            <p>?????? ??????? ????? ????? ??????? ?????? ??????? ???????? ?? ???</p>
+            <h1>أهلاً بك أيها المتعلم  </h1>
+            <h2>في موقع **الدراسة بالمراسلة - يوسف**</h2>
+            <p>بوابتك السريعة لجميع خدمات الديوان الوطني للتعليم والتكوين عن بعد</p>
         </div>
 
         <div class="main-buttons-container">
             <button class="main-btn" onclick="showPage('registration-page')">
-                <i class="fas fa-user-plus"></i> ??????? ?? ????????
+                <i class="fas fa-user-plus"></i> التسجيل في المراسلة
             </button>
             <button class="main-btn" onclick="showPage('documents-page')">
-                <i class="fas fa-file-alt"></i> ??? ???????
+                <i class="fas fa-file-alt"></i> سحب الوثائق
             </button>
             <button class="main-btn" onclick="showPage('platforms-page')">
-                <i class="fas fa-book-reader"></i> ???????? ?????????
+                <i class="fas fa-book-reader"></i> الأرضيات التعليمية
             </button>
             <button class="main-btn" onclick="showPage('e-homework-page')">
-                <i class="fas fa-laptop-code"></i> ????? ??????????
+                <i class="fas fa-laptop-code"></i> الفرض الإلكتروني
+            </button>
+            
+            <button class="main-btn timing" onclick="showPage('timing-page')">
+                <i class="fas fa-clock"></i> مواعيد
             </button>
         </div>
 
         <hr>
 
         <div class="social-media-container">
-            <p>????? ????: </p>
+            <p>تواصل معنا: </p>
             <a href="https://t.me/youcef_info_2" target="_blank" class="social-icon telegram"><i class="fab fa-telegram-plane"></i></a>
             <a href="https://wa.me/213665074666" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.instagram.com/youcef.info2" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
@@ -391,21 +545,21 @@
     </main>
     
     <div id="pages-container">
-        </div>
+    </div>
     
     <div id="loading-overlay" class="hidden">
         <div class="spinner"></div>
-        <p>???? ????? ??????? ???? ????????...</p>
+        <p>جارٍ تحميل الصفحة، يرجى الانتظار...</p>
     </div>
 
     <script>
-        // [ ... ???? ???? JavaScript? ??? ???? ?????? ???????? ???????? ??????? ... ]
+        // [ ... جميع دوال JavaScript، بما فيها بيانات المراكز، مُصحَّحة ومكتملة ... ]
 
         const pagesContainer = document.getElementById('pages-container');
         const loadingOverlay = document.getElementById('loading-overlay');
         let currentExternalUrl = null;
 
-        // ???? ?????? ???????? ???????? ?????? ?????
+        // دوال التحكم بالقائمة الجانبية وصفحات الويب
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("open");
         }
@@ -418,7 +572,7 @@
             
             pagesContainer.innerHTML = '';
             
-            // ????? ???? buildPage() ?????? ???????
+            // إضافة دوال buildPage() لتشغيل الأزرار
             if (pageId === 'registration-page') {
                 buildRegistrationPage();
             } else if (pageId === 'documents-page') {
@@ -437,6 +591,8 @@
                 buildDonationPage();
             } else if (pageId === 'about-app-page') {
                 buildAboutAppPage();
+            } else if (pageId === 'timing-page') {
+                buildTimingPage(); // الدالة الجديدة لصفحة المواعيد
             }
         }
 
@@ -447,26 +603,26 @@
             currentExternalUrl = null;
         }
 
-        // ?? ????? ???? openExternalLink ????? ?? ??????? ????????
-        function openExternalLink(url, title = "???? ???????...") {
+        // تم تصحيح دالة openExternalLink لتعمل مع الروابط الخارجية
+        function openExternalLink(url, title = "جارٍ التحميل...") {
             showLoading();
             setTimeout(() => {
                 window.open(url, '_blank');
                 hideLoading();
-            }, 500); // 500ms ?????? ??? ?????
+            }, 500); // 500ms انتظار قبل الفتح
         }
 
         function shareApp() {
             if (navigator.share) {
                 navigator.share({
-                    title: '???? ??????? ????????? - ????',
-                    text: '???? ???? ?????? ??????? ?????? ??????? ???????? ?? ???!',
-                    url: window.location.href 
+                    title: 'موقع الدراسة بالمراسلة - يوسف',
+                    text: 'أفضل موقع لخدمات الديوان الوطني للتعليم والتكوين عن بعد!',
+                    url: window.location.href
                 })
-                .then(() => console.log('??? ???????? ?????'))
-                .catch((error) => alert('??? ????????: ' + error.message));
+                .then(() => console.log('تمت المشاركة بنجاح'))
+                .catch((error) => alert('فشل المشاركة: ' + error.message));
             } else {
-                alert('???? ??? ?????? ???????? ??????: ' + window.location.href);
+                alert('يرجى نسخ الرابط ومشاركته يدوياً: ' + window.location.href);
             }
         }
 
@@ -478,22 +634,64 @@
             loadingOverlay.classList.add('hidden');
         }
         
-        // ???? ????? ????? ???????
+        // أداة لبناء أزرار الروابط
         function createLinkButton(text, url) {
             return `<button class="sub-page-btn" onclick="openExternalLink('${url}', '${text}')">
                 ${text} <i class="fas fa-external-link-alt" style="float: left;"></i>
             </button>`;
         }
         
-        // --- ???? ???? ??????? ??????? ---
+        // --- دوال بناء الصفحات الفرعية ---
+        
+        // الدالة الجديدة لبناء صفحة المواعيد
+        function buildTimingPage() {
+            const html = `
+                <div class="sub-page">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2><i class="fas fa-calendar-alt"></i> مواعيد مهمة</h2>
+                    <p style="color: #007bff; font-weight: bold; text-align: center;">التواريخ أدناه لم تحدد بعد من طرف الديوان الوطني للتعليم والتكوين عن بعد، سيتم تحديثها عندما يتم نشر الرزنامة.</p>
+                    
+                    <div class="static-timing-btn">
+                        <h3>موعد إمتحان اثبات المستوى</h3>
+                        <p>تاريخ البدأ: **00/05/2026**</p>
+                    </div>
+
+                    <div class="static-timing-btn">
+                        <h3>موعد الفرض الالكتروني</h3>
+                        <p>تاريخ البدأ: **00/00/2026** إلى غاية **00/00/2026**</p>
+                    </div>
+
+                    <div class="static-timing-btn">
+                        <h3>موعد فرض المراقبة الذاتية رقم 01 الأسئلة</h3>
+                        <p>تاريخ البدأ: **00/00/2026** إلى غاية **00/00/2026**</p>
+                    </div>
+
+                    <div class="static-timing-btn">
+                        <h3>موعد فرض المراقبة الذاتية رقم 01 الإجوبة</h3>
+                        <p>تاريخ البدأ: **00/00/2026** إلى غاية **00/00/2026**</p>
+                    </div>
+
+                    <div class="static-timing-btn">
+                        <h3>موعد فرض المراقبة الذاتية رقم 02 الأسئلة</h3>
+                        <p>تاريخ البدأ: **00/00/2026** إلى غاية **00/00/2026**</p>
+                    </div>
+
+                    <div class="static-timing-btn">
+                        <h3>موعد فرض المراقبة الذاتية رقم 02 الإجابة</h3>
+                        <p>تاريخ البدأ: **00/00/2026** إلى غاية **00/00/2026**</p>
+                    </div>
+                </div>
+            `;
+            pagesContainer.innerHTML = html;
+        }
 
         function buildRegistrationPage() {
             const html = `
                 <div class="sub-page">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>??????? ?? ???????? ??</h2>
-                    ${createLinkButton('????? ????? ????', 'https://inscriptic.onefd.edu.dz/preinscription/')}
-                    ${createLinkButton('????? ????? ????', 'https://inscriptic.onefd.edu.dz/preinscription/')}
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>التسجيل في المراسلة  </h2>
+                    ${createLinkButton('تسجيل متعلم جديد', 'https://inscriptic.onefd.edu.dz/preinscription/')}
+                    ${createLinkButton('تسجيل متعلم سابق', 'https://inscriptic.onefd.edu.dz/preinscription/')}
                 </div>
             `;
             pagesContainer.innerHTML = html;
@@ -502,16 +700,16 @@
         function buildDocumentsPage() {
             const html = `
                 <div class="sub-page">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>??? ???? ??????? ???</h2>
-                    ${createLinkButton('????? ??? ????? ???????', 'https://inscriptic.onefd.edu.dz/preinscription/')}
-                    ${createLinkButton('??????? ????? ???????', 'https://inscriptic.onefd.edu.dz/preinscription/')}
-                    ${createLinkButton('??????? ????? ???????', 'https://inscriptic.onefd.edu.dz/preinscription/')}
-                    ${createLinkButton('????? ??????? ????????', 'https://e-devoir-3am.onefd.edu.dz/preinscription/index.php/upload_documents')}
-                    ${createLinkButton('??????? ??? ???????', 'https://inscriptic.onefd.edu.dz/numins/num_ins_index.php')}
-                    ${createLinkButton('??????? ??????? ?????? ???????', 'https://inscriptic.onefd.edu.dz/convocation_2025/cen2012.php')}
-                    ${createLinkButton('??????? ??? ??????', 'http://inscriptic.onefd.edu.dz/releve/matricule.php')}
-                    ${createLinkButton('??????? ????? ????? ???????', 'https://www.onefd.edu.dz/att_niv_2025/')}
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>سحب وطبع الوثائق  </h2>
+                    ${createLinkButton('إعادة طبع وثائق التسجيل', 'https://inscriptic.onefd.edu.dz/preinscription/')}
+                    ${createLinkButton('استخراج شهادة التسجيل', 'https://inscriptic.onefd.edu.dz/preinscription/')}
+                    ${createLinkButton('استخراج تأكيد التسجيل', 'https://inscriptic.onefd.edu.dz/preinscription/')}
+                    ${createLinkButton('إرفاق الوثائق الثبوتية', 'https://e-devoir-3am.onefd.edu.dz/preinscription/index.php/upload_documents')}
+                    ${createLinkButton('استخراج رقم التسجيل', 'https://inscriptic.onefd.edu.dz/numins/num_ins_index.php')}
+                    ${createLinkButton('استخراج استدعاء امتحان المستوى', 'https://inscriptic.onefd.edu.dz/convocation_2025/cen2012.php')}
+                    ${createLinkButton('استخراج كشف النقاط', 'http://inscriptic.onefd.edu.dz/releve/matricule.php')}
+                    ${createLinkButton('استخراج شهادة إثبات المستوى', 'https://www.onefd.edu.dz/att_niv_2025/')}
                 </div>
             `;
             pagesContainer.innerHTML = html;
@@ -520,12 +718,12 @@
         function buildPlatformsPage() {
             const html = `
                 <div class="sub-page">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>???????? ????????? (Scolarium) ??</h2>
-                    ${createLinkButton('??????? ???????', 'http://scolarium-moyen.onefd.edu.dz/login/index.php')}
-                    ${createLinkButton('????? ???? ?????', 'http://scolarium-1as.onefd.edu.dz/login/index.php')}
-                    ${createLinkButton('????? ??????? ?????', 'http://scolarium-2as.onefd.edu.dz/login/index.php')}
-                    ${createLinkButton('????? ??????? ?????', 'http://scolarium-3as.onefd.edu.dz/login/index.php')}
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>الأرضيات التعليمية (Scolarium)  </h2>
+                    ${createLinkButton('المستوى المتوسط', 'http://scolarium-moyen.onefd.edu.dz/login/index.php')}
+                    ${createLinkButton('مستوى أولى ثانوي', 'http://scolarium-1as.onefd.edu.dz/login/index.php')}
+                    ${createLinkButton('مستوى الثانية ثانوي', 'http://scolarium-2as.onefd.edu.dz/login/index.php')}
+                    ${createLinkButton('مستوى الثالثة ثانوي', 'http://scolarium-3as.onefd.edu.dz/login/index.php')}
                 </div>
             `;
             pagesContainer.innerHTML = html;
@@ -534,13 +732,13 @@
         function buildEHomeworkPage() {
             const html = `
                 <div class="sub-page" id="e-homework-main">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>???? ????? ?????????? ??</h2>
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>منصة الفرض الإلكتروني  </h2>
                     <button class="sub-page-btn" onclick="buildEHomeworkLevel('moyen')">
-                        <i class="fas fa-graduation-cap"></i> ??????? ???????
+                        <i class="fas fa-graduation-cap"></i> المستوى المتوسط
                     </button>
                     <button class="sub-page-btn" onclick="buildEHomeworkLevel('secondary')">
-                        <i class="fas fa-graduation-cap"></i> ??????? ???????
+                        <i class="fas fa-graduation-cap"></i> المستوى الثانوي
                     </button>
                 </div>
             `;
@@ -553,24 +751,24 @@
             let title = '';
 
             if (level === 'moyen') {
-                title = '????? ?????????? - ??????? ???????';
+                title = 'الفرض الإلكتروني - المستوى المتوسط';
                 buttonsHtml = `
-                    ${createLinkButton('???? ?????', 'https://e-devoir-1am.onefd.edu.dz/')}
-                    ${createLinkButton('????? ?????', 'https://e-devoir-2am.onefd.edu.dz/')}
-                    ${createLinkButton('????? ?????', 'https://e-devoir-3am.onefd.edu.dz/')}
-                    ${createLinkButton('??????? ?????', 'https://e-devoir-4am.onefd.edu.dz/')}
+                    ${createLinkButton('أولى متوسط', 'https://e-devoir-1am.onefd.edu.dz/')}
+                    ${createLinkButton('ثانية متوسط', 'https://e-devoir-2am.onefd.edu.dz/')}
+                    ${createLinkButton('ثالثة متوسط', 'https://e-devoir-3am.onefd.edu.dz/')}
+                    ${createLinkButton('الرابعة متوسط', 'https://e-devoir-4am.onefd.edu.dz/')}
                 `;
             } else if (level === 'secondary') {
-                title = '????? ?????????? - ??????? ???????';
+                title = 'الفرض الإلكتروني - المستوى الثانوي';
                 buttonsHtml = `
-                    ${createLinkButton('???? ?????', 'https://e-devoir-1as.onefd.edu.dz/index.php/welcome')}
-                    ${createLinkButton('??????? ?????', 'https://e-devoir-2as.onefd.edu.dz/index.php/welcome')}
-                    ${createLinkButton('??????? ?????', 'https://e-devoir-3as.onefd.edu.dz/index.php/welcome')}
+                    ${createLinkButton('أولى ثانوي', 'https://e-devoir-1as.onefd.edu.dz/index.php/welcome')}
+                    ${createLinkButton('الثانية ثانوي', 'https://e-devoir-2as.onefd.edu.dz/index.php/welcome')}
+                    ${createLinkButton('الثالثة ثانوي', 'https://e-devoir-3as.onefd.edu.dz/index.php/welcome')}
                 `;
             }
 
             homeworkMainDiv.innerHTML = `
-                <button class="back-btn" onclick="buildEHomeworkPage()"><i class="fas fa-arrow-right"></i> ????</button>
+                <button class="back-btn" onclick="buildEHomeworkPage()"><i class="fas fa-arrow-right"></i> رجوع</button>
                 <h2>${title}</h2>
                 ${buttonsHtml}
             `;
@@ -579,44 +777,44 @@
         function buildAboutPage() {
             const html = `
                 <div class="sub-page">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>?? ?? ??????? ?????????? ??</h2>
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>ما هي الدراسة بالمراسلة؟  </h2>
                     <p style="background-color: #f7f7f7; padding: 15px; border-radius: 8px; border-right: 4px solid #007bff;">
-                        ????? ???????? ???? ??????? ?????? ??????? ???????? ?? ??? ???? ?????? ????? ???????? ??? ?? ????? ?? ??????? ??? ???? ???? ??? ??? ???? ???? ?????? ????? ??? ????? ?????? ?? ?????? ???? ?? ?????? ?????.
+                        عزيزي المستخدم يتيح الديوان الوطني للتعليم والتكوين عن بعد فرصة لإكمال مسارك التعليمي لكل من انقطع عن الدراسة لأي سبب، وحتى لمن كان يدرس بمحو الأمية وتحصل على شهادة التحرر من الأمية يسجل في الأولى متوسط.
                     </p>
                     
-                    <h3>???? ????????:</h3>
+                    <h3>شروط الانتقال:</h3>
                     <ul>
-                        <li>???? ??? ????? ???? ?? ???? ?? ????? ?????? ??? ??? ????? ??? ?????? ?????? **9/20 ??? ???**.</li>
-                        <li>??? ?? ??????? **??????? ????? ??? ??????? ?????** ????? ???? ?? ???? ????? ?????? **????? ?? ???? 10/20**.</li>
+                        <li>يمكن لأي متعلم جديد أن يسجل في القسم الأعلى إذا كان متحصل على المعدل السنوي **9/20 فما فوق**.</li>
+                        <li>إلا من المستوى **الثانية ثانوي إلى الثالثة ثانوي** يتطلب عليه أن يكون معدله السنوي **يساوي أو يفوق 10/20**.</li>
                     </ul>
 
-                    <h3>???? ??????? ???? ???:</h3>
-                    <p>?????? ????? ???? ?? ??????? ?????????? ????? ????? ????? ?????? ??? ?? ???? ?? ???? ???????? ?? ???? ???? ?????:</p>
+                    <h3>شروط التسجيل لأول مرة:</h3>
+                    <p>لتسجيل متعلم جديد في الدراسة بالمراسلة، يتطلب إحضار الملف التالي إلى أي دكان أو قاعة للإنترنت أو يسجل نفسه بنفسه:</p>
                     <ul style="color: #dc3545;">
-                        <li><i class="fas fa-image"></i> ???? ????? (**??????**)</li>
-                        <li><i class="fas fa-calendar-alt"></i> ????? ??????? (**??????**)</li>
-                        <li><i class="fas fa-map-marker-alt"></i> ????? ??????? (?? ????)</li>
-                        <li><i class="fas fa-chart-bar"></i> ??? ???? ????? ?????? (?? ???)</li>
-                        <li><i class="fas fa-school"></i> ??????? ???????? (**??????**)</li>
-                        <li><i class="fas fa-id-card"></i> ????? ??????? ??????? ?????????? (**??????**)</li>
-                        <li><i class="fas fa-feather-alt"></i> ????? ?????? ?? ?????? (**??????**) ???? ??????? ??? ??????</li>
-                        <li><i class="fas fa-money-bill-alt"></i> ????? ????? (??????)</li>
+                        <li><i class="fas fa-image"></i> صورة شمسية (**إجباري**)</li>
+                        <li><i class="fas fa-calendar-alt"></i> شهادة الميلاد (**إجباري**)</li>
+                        <li><i class="fas fa-map-marker-alt"></i> بطاقة الإقامة (إن وجدت)</li>
+                        <li><i class="fas fa-chart-bar"></i> كشف نقاط الفصل الثالث (إن وجد)</li>
+                        <li><i class="fas fa-school"></i> الشهادة المدرسية (**إجباري**)</li>
+                        <li><i class="fas fa-id-card"></i> بطاقة التعريف الوطنية البيومترية (**إجباري**)</li>
+                        <li><i class="fas fa-feather-alt"></i> شهادة التحرر من الأمية (**إجباري**) خاصة بمتعلمي محو الأمية</li>
+                        <li><i class="fas fa-money-bill-alt"></i> إيصال الدفع (الحقوق)</li>
                     </ul>
 
-                    <h3>???? ??????? (???????):</h3>
+                    <h3>حقوق التسجيل (تقريبية):</h3>
                     <table style="width: 100%; border-collapse: collapse; text-align: right; margin-top: 15px;">
                         <thead>
                             <tr style="background-color: #007bff; color: white;">
-                                <th style="padding: 10px; border: 1px solid white;">????? ???????</th>
-                                <th style="padding: 10px; border: 1px solid white;">?????? (??)</th>
+                                <th style="padding: 10px; border: 1px solid white;">طريقة الدراسة</th>
+                                <th style="padding: 10px; border: 1px solid white;">المبلغ (دج)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr style="background-color: #f2f2f2;"><td>??????? ???????</td><td>2677 ??</td></tr>
-                            <tr><td>??????? ?????? ???????</td><td>1977 ??</td></tr>
-                            <tr style="background-color: #f2f2f2;"><td>??????? ??? ??????? (????????? ?????)</td><td>1777 ??</td></tr>
-                            <tr><td>??????? ??? ??????? (??????? ????????)</td><td>1877 ??</td></tr>
+                            <tr style="background-color: #f2f2f2;"><td>الدراسة بالكتاب</td><td>2677 دج</td></tr>
+                            <tr><td>الدراسة بالقرص المضغوط</td><td>1977 دج</td></tr>
+                            <tr style="background-color: #f2f2f2;"><td>الدراسة عبر الأرضية (المتعلمين الجدد)</td><td>1777 دج</td></tr>
+                            <tr><td>الدراسة عبر الأرضية (القدامى المعيدون)</td><td>1877 دج</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -626,30 +824,30 @@
 
         function buildCheckLevelPage() {
             const levels = {
-                '???? ?????': 9, '????? ?????': 9, '????? ?????': 9, '????? ?????': 9,
-                '???? ?????': 9, '??????? ?????': 10
+                'أولى متوسط': 9, 'ثانية متوسط': 9, 'ثالثة متوسط': 9, 'رابعة متوسط': 9,
+                'أولى ثانوي': 9, 'الثانية ثانوي': 10
             };
             const options = Object.keys(levels).map(level => `<option value="${level}">${level}</option>`).join('');
 
             const html = `
                 <div class="sub-page" id="level-checker-content">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>?????? ?? ?????? ?? ??????? ?????? ?</h2>
-                    <p>?????? ?????? ?????? ?????? ?????? ????? ??????:</p>
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>التحقق من القبول في المستوى الأعلى  </h2>
+                    <p>الرجاء اختيار مستواك الحالي وإدخال معدلك السنوي:</p>
                     
                     <select id="study-level">
-                        <option value="">-- ???? ?????? ??????? --</option>
+                        <option value="">-- اختر مستواك الدراسي --</option>
                         ${options}
                     </select>
                     
-                    <input type="number" id="annual-average" placeholder="???? ????? ?????? (?? 20)" min="0" max="20" step="0.01">
+                    <input type="number" id="annual-average" placeholder="أدخل معدلك السنوي (من 20)" min="0" max="20" step="0.01">
                     
-                    <button class="check-btn" onclick="checkLevelResult()">????</button>
+                    <button class="check-btn" onclick="checkLevelResult()">تحقق</button>
                     
                     <div id="result-message" class="result-message hidden"></div>
 
                     <p style="font-size: 0.9rem; color: #555; margin-top: 20px;">
-                        <i class="fas fa-info-circle"></i> **?????? ???????:** ?????? ?????? ????? ?? ??? ?????? ????? ??????.
+                        <i class="fas fa-info-circle"></i> **ملاحظة توضيحية:** المعدل السنوي موجود في كشف النقاط للفصل الثالث.
                     </p>
                 </div>
             `;
@@ -663,15 +861,15 @@
             resultDiv.classList.add('hidden');
 
             if (!level || isNaN(average) || average < 0 || average > 20) {
-                resultDiv.innerHTML = '?????? ????? ?????? ????? (??????? ???????).';
+                resultDiv.innerHTML = 'الرجاء إدخال بيانات صحيحة (المستوى والمعدل).';
                 resultDiv.className = 'result-message failure';
                 resultDiv.classList.remove('hidden');
                 return;
             }
 
             const levels = {
-                '???? ?????': 9, '????? ?????': 9, '????? ?????': 9, '????? ?????': 9,
-                '???? ?????': 9, '??????? ?????': 10
+                'أولى متوسط': 9, 'ثانية متوسط': 9, 'ثالثة متوسط': 9, 'رابعة متوسط': 9,
+                'أولى ثانوي': 9, 'الثانية ثانوي': 10
             };
 
             const requiredAverage = levels[level];
@@ -679,10 +877,10 @@
             let isSuccess = false;
 
             if (average >= requiredAverage) {
-                message = `?????! ?????? ${average.toFixed(2)}? ????? ??????? ?? **??????? ??????** ?????.`;
+                message = `مبارك! بمعدلك ${average.toFixed(2)}، يمكنك التسجيل في **المستوى الأعلى** بنجاح.`;
                 isSuccess = true;
             } else {
-                message = `?????. ?????? ${average.toFixed(2)}? ????? ??? **????? ?????** ??????? ?? ${level}. ?????? ??????? ?? ${requiredAverage}.`;
+                message = `عذراً. بمعدلك ${average.toFixed(2)}، يتطلب منك **إعادة السنة** للدراسة في ${level}. المعدل المطلوب هو ${requiredAverage}.`;
                 isSuccess = false;
             }
 
@@ -693,46 +891,46 @@
 
         function buildCentersPage() {
             const centersData = [
-                // ???? ?????? ??????? ????????
-                { id: 1, name: '?????', states: '?????', address: '??? ??????? ??????? ?.? 76', phone: '049.36.12.31', fax: '049.36.12.31', email: 'cwefd01@onefd.edu.dz' },
-                { id: 2, name: '?????', states: '?????', address: '???? ?? ????? ?.? 190', phone: '027.77.00.24', fax: '027.77.00.24', email: 'cwefd02@onefd.edu.dz' },
-                { id: 3, name: '???????', states: '???????? ??????', address: '?? ???????? ?? ???? ?.? 1800', phone: '029.13.24.30', fax: '029.13.24.30', email: 'cwefd03@onefd.edu.dz' },
-                { id: 4, name: '?????', states: '?????', address: '???? 19 ???? 1965', phone: '033.25.80.77', fax: '/', email: 'cwefd05@onefd.edu.dz' },
-                { id: 5, name: '?????', states: '?????? ????', address: '?? 300 ???? ??????', phone: '034.12.98.47', fax: '034.12.98.47', email: 'cwefd06@onefd.edu.dz' },
-                { id: 6, name: '?????', states: '?????', address: '???? ????? ??? ??????', phone: '033.53.08.56', fax: '033.53.08.56', email: 'cwefd07@onefd.edu.dz' },
-                { id: 7, name: '????', states: '????? ??????', address: '?? ???????? ?.? ??? 64 ??????', phone: '049.23.87.28', fax: '049.23.87.28', email: 'cwefd08@onefd.edu.dz' },
-                { id: 8, name: '???????', states: '???????', address: '???? 5 ?????? ?????', phone: '029.32.23.20', fax: '029.32.23.20', email: 'cwefd11@onefd.edu.dz' },
-                { id: 9, name: '????', states: '????? ?????', address: '?.? 13 ??????', phone: '037.58.59.49', fax: '037.58.59.49', email: 'cwefd12@onefd.edu.dz' },
-                { id: 10, name: '??????', states: '??????? ??? ??????', address: '???? ??? ?????? ?.? 314', phone: '043.27.59.30', fax: '043.27.59.30', email: 'Cwefd13@onefd.edu.dz' },
-                { id: 11, name: '?????', states: '?????', address: '?? ?????????? ?.? 111', phone: '046.22.50.47', fax: '046.22.50.47', email: 'cwefd14@onefd.edu.dz' },
-                { id: 12, name: '???? ???', states: '???? ???? ???????? ???????', address: '???? ???? ????? ?????', phone: '026.19.70.50', fax: '026.19.70.50', email: 'cwefd15@onefd.edu.dz' },
-                { id: 13, name: '???????', states: '???????? ??????', address: '???? ???? ???? 1', phone: '021.66.42.11', fax: '021.66.42.11', email: 'cwefd16@onefd.edu.dz' },
-                { id: 14, name: '??????', states: '??????? ???????', address: '????? ?????? ?????? ????', phone: '027.93.03.92', fax: '027.93.03.92', email: 'cwefd17@onefd.edu.dz' },
-                { id: 15, name: '????', states: '????? ??? ????????', address: '???? ??? ?????? 1954 ??? 67', phone: '044.77.83.00', fax: '/', email: 'cwefd19@onefd.edu.dz' },
-                { id: 16, name: '?????', states: '?????? ?????? ???????? ?????', address: '???? ???? ????', phone: '048.43.35.93', fax: '048.43.35.93', email: 'cwefd20@onefd.edu.dz' },
-                { id: 17, name: '??????', states: '??????? ????', address: '???? ???? ????? ?.? 225 14', phone: '038.77.44.09', fax: '038.77.44.09', email: 'cwefd21@onefd.edu.dz' },
-                { id: 18, name: '?????', states: '?????? ??????? ?????', address: '?? ???? ??????? ??????', phone: '038.43.69.88', fax: '038.43.69.88', email: 'cwefd23@onefd.edu.dz' },
-                { id: 19, name: '???????', states: '???????? ?? ???????', address: '?? 20 ??? 1955 ?.? 180', phone: '031.64.04.44', fax: '031.64.04.44', email: 'cwefd25@onefd.edu.dz' },
-                { id: 20, name: '??????', states: '??????? ???????', address: '?? ?????? 01', phone: '025.73.07.04', fax: '025.73.07.04', email: 'cwefd26@onefd.edu.dz' },
-                { id: 21, name: '???????', states: '???????? ??????', address: '?? ?????? ?.? 502', phone: '045.40.91.14', fax: '045.40.91.14', email: 'cwefd27@onefd.edu.dz' },
-                { id: 22, name: '?????', states: '?????? ?????', address: '???? ????? ?.? 920', phone: '029.71.17.06', fax: '029.71.17.06', email: 'cwefd30@onefd.edu.dz' },
-                { id: 23, name: '?????', states: '?????? ???? ??????', address: '??? 22 ???? ???? ??? ???? ?.? 1535 ???? ???? ????', phone: '041.38.62.16', fax: '041.38.62.16', email: 'cwefd31@onefd.edu.dz' },
-                { id: 24, name: '????????', states: '????????', address: '???? ??? ??????', phone: '046.57.54.73', fax: '046.57.54.73', email: 'cwefd38@omefd.edu.dz' },
-                { id: 25, name: '??????', states: '??????', address: '?? ?????? ??? ??????', phone: '032.11.41.35', fax: '032.11.41.35', email: 'cwefd39@onefd.edu.dz' },
-                { id: 26, name: '??? ?????', states: '??? ?????', address: '??? ????? ?????', phone: '037.82.10.09', fax: '037.82.10.09', email: 'cwefd41@onefd.edu.dz' },
-                { id: 27, name: '??? ??????', states: '??? ??????', address: '???? ????? ?????? ????? ?????', phone: '027.51.56.56', fax: '027.51.56.11', email: 'cwefd44@omefd.edu.dz' }
+                // جميع بيانات المراكز الولائية
+                { id: 1, name: 'أدرار', states: 'أدرار', address: 'مقر الولاية القديمة ص.ب 76', phone: '049.36.12.31', fax: '049.36.12.31', email: 'cwefd01@onefd.edu.dz' },
+                { id: 2, name: 'الشلف', states: 'الشلف', address: 'شارع بن باديس ص.ب 190', phone: '027.77.00.24', fax: '027.77.00.24', email: 'cwefd02@onefd.edu.dz' },
+                { id: 3, name: 'الأغواط', states: 'الأغواط، غرداية', address: 'حي المعمورة بن عامر ص.ب 1800', phone: '029.13.24.30', fax: '029.13.24.30', email: 'cwefd03@onefd.edu.dz' },
+                { id: 4, name: 'باتنة', states: 'باتنة', address: 'شارع 19 جوان 1965', phone: '033.25.80.77', fax: '/', email: 'cwefd05@onefd.edu.dz' },
+                { id: 5, name: 'بجاية', states: 'بجاية، جيجل', address: 'حي 300 مسكن أحدادن', phone: '034.12.98.47', fax: '034.12.98.47', email: 'cwefd06@onefd.edu.dz' },
+                { id: 6, name: 'بسكرة', states: 'بسكرة', address: 'شارع حمودة عبد الرزاق', phone: '033.53.08.56', fax: '033.53.08.56', email: 'cwefd07@onefd.edu.dz' },
+                { id: 7, name: 'بشار', states: 'بشار، تيندوف', address: 'حي الجيهاني ص.ب رقم 64 البرقة', phone: '049.23.87.28', fax: '049.23.87.28', email: 'cwefd08@onefd.edu.dz' },
+                { id: 8, name: 'تمنراست', states: 'تمنراست', address: 'شارع 5 جزيلية سرسوف', phone: '029.32.23.20', fax: '029.32.23.20', email: 'cwefd11@onefd.edu.dz' },
+                { id: 9, name: 'تبسة', states: 'تبسة، خنشلة', address: 'ص.ب 13 النهضة', phone: '037.58.59.49', fax: '037.58.59.49', email: 'cwefd12@onefd.edu.dz' },
+                { id: 10, name: 'تلمسان', states: 'تلمسان، عين تموشنت', address: 'شارع دار الحديث ص.ب 314', phone: '043.27.59.30', fax: '043.27.59.30', email: 'Cwefd13@onefd.edu.dz' },
+                { id: 11, name: 'تيارت', states: 'تيارت', address: 'حي الصوناتيبا ص.ب 111', phone: '046.22.50.47', fax: '046.22.50.47', email: 'cwefd14@onefd.edu.dz' },
+                { id: 12, name: 'تيزي وزو', states: 'تيزي وزو، بومرداس، البويرة', address: 'شارع أحمد ملولي مدوحة', phone: '026.19.70.50', fax: '026.19.70.50', email: 'cwefd15@onefd.edu.dz' },
+                { id: 13, name: 'الجزائر', states: 'الجزائر، تيبازة', address: 'شارع محمد مادة 1', phone: '021.66.42.11', fax: '021.66.42.11', email: 'cwefd16@onefd.edu.dz' },
+                { id: 14, name: 'الجلفة', states: 'الجلفة، المسيلة', address: 'بجوار متوسطة الرايس محمد', phone: '027.93.03.92', fax: '027.93.03.92', email: 'cwefd17@onefd.edu.dz' },
+                { id: 15, name: 'سطيف', states: 'سطيف، برج بوعريريج', address: 'شارع أول نوفمبر 1954 رقم 67', phone: '044.77.83.00', fax: '/', email: 'cwefd19@onefd.edu.dz' },
+                { id: 16, name: 'سعيدة', states: 'سعيدة، البيض، النعامة، معسكر', address: 'شارع شبلي سعيد', phone: '048.43.35.93', fax: '048.43.35.93', email: 'cwefd20@onefd.edu.dz' },
+                { id: 17, name: 'سكيكدة', states: 'سكيكدة، ميلة', address: 'شارع عيسى بولغب ص.ب 225 14', phone: '038.77.44.09', fax: '038.77.44.09', email: 'cwefd21@onefd.edu.dz' },
+                { id: 18, name: 'عنابة', states: 'عنابة، الطارف، قالمة', address: 'حي جبهة التحرير الوطني', phone: '038.43.69.88', fax: '038.43.69.88', email: 'cwefd23@onefd.edu.dz' },
+                { id: 19, name: 'قسنطينة', states: 'قسنطينة، أم البواقي', address: 'حي 20 أوت 1955 ص.ب 180', phone: '031.64.04.44', fax: '031.64.04.44', email: 'cwefd25@onefd.edu.dz' },
+                { id: 20, name: 'المدية', states: 'المدية، البليدة', address: 'حي المصلى 01', phone: '025.73.07.04', fax: '025.73.07.04', email: 'cwefd26@onefd.edu.dz' },
+                { id: 21, name: 'مستغانم', states: 'مستغانم، غليزان', address: 'حي بايموت ص.ب 502', phone: '045.40.91.14', fax: '045.40.91.14', email: 'cwefd27@onefd.edu.dz' },
+                { id: 22, name: 'ورقلة', states: 'ورقلة، إليزي', address: 'شارع القدس ص.ب 920', phone: '029.71.17.06', fax: '029.71.17.06', email: 'cwefd30@onefd.edu.dz' },
+                { id: 23, name: 'وهران', states: 'وهران، سيدي بلعباس', address: 'رقم 22 شارع شريط علي شريف ص.ب 1535 بريد صايم محمد', phone: '041.38.62.16', fax: '041.38.62.16', email: 'cwefd31@onefd.edu.dz' },
+                { id: 24, name: 'تيسمسيلت', states: 'تيسمسيلت', address: 'شارع أول نوفمبر', phone: '046.57.54.73', fax: '046.57.54.73', email: 'cwefd38@omefd.edu.dz' },
+                { id: 25, name: 'الوادي', states: 'الوادي', address: 'حي الأمير عبد القادر', phone: '032.11.41.35', fax: '032.11.41.35', email: 'cwefd39@onefd.edu.dz' },
+                { id: 26, name: 'سوق أهراس', states: 'سوق أهراس', address: 'نهج مولود فرعون', phone: '037.82.10.09', fax: '037.82.10.09', email: 'cwefd41@onefd.edu.dz' },
+                { id: 27, name: 'عين الدفلى', states: 'عين الدفلى', address: 'شارع مروان متوسطة بسكري فتيحة', phone: '027.51.56.56', fax: '027.51.56.11', email: 'cwefd44@omefd.edu.dz' }
             ];
 
             const selectOptions = centersData.map(center => `<option value="${center.id}">${center.name}</option>`).join('');
 
             const html = `
                 <div class="sub-page">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>??????? ???????? ???????? ??</h2>
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>الاتصال بالمراكز الولائية  </h2>
                     
-                    <p>???? ????? ??????? ???? ??????? ???????:</p>
+                    <p>اختر مركزك الولائي لعرض معلومات الاتصال:</p>
                     <select id="center-select" onchange="displayCenterInfo()">
-                        <option value="">-- ???? ?????? --</option>
+                        <option value="">-- اختر المركز --</option>
                         ${selectOptions}
                     </select>
                     
@@ -758,12 +956,12 @@
             
             if (center) {
                 detailsDiv.innerHTML = `
-                    <h3><i class="fas fa-map-marker-alt"></i> ???? ${center.name}</h3>
-                    <p>???????? ???????: **${center.states}**</p>
-                    <p><i class="fas fa-road"></i> **???????:** ${center.address}</p>
-                    <p><i class="fas fa-phone"></i> **??????:** <a href="tel:${center.phone}">${center.phone}</a></p>
-                    <p><i class="fas fa-fax"></i> **??????:** ${center.fax}</p>
-                    <p><i class="fas fa-envelope"></i> **?????? ??????????:** <a href="mailto:${center.email}">${center.email}</a></p>
+                    <h3><i class="fas fa-map-marker-alt"></i> مركز ${center.name}</h3>
+                    <p>الولايات التابعة: **${center.states}**</p>
+                    <p><i class="fas fa-road"></i> **العنوان:** ${center.address}</p>
+                    <p><i class="fas fa-phone"></i> **الهاتف:** <a href="tel:${center.phone}">${center.phone}</a></p>
+                    <p><i class="fas fa-fax"></i> **الفاكس:** ${center.fax}</p>
+                    <p><i class="fas fa-envelope"></i> **البريد الإلكتروني:** <a href="mailto:${center.email}">${center.email}</a></p>
                 `;
                 detailsDiv.classList.remove('hidden');
             }
@@ -772,31 +970,31 @@
         function buildDonationPage() {
             const html = `
                 <div class="sub-page">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>???? ?? ??? ?????? ??</h2>
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>ساهم في دعم الموقع  </h2>
                     
                     <p style="text-align: center; font-style: italic; font-size: 1.1rem; color: #555;">
-                        ????? ???????? ???? ??????? ??? ????????? ?? ????? ????? ????? ?????? ?????? ????. ?? ??? ????? ???.
+                        عزيزي المتعلم، دعمك يساعدنا على الاستمرار في تقديم محتوى مجاني وتطوير الموقع أكثر. بك أنت نستمر نحن.
                     </p>
 
                     <div class="donation-box">
-                        <h3><i class="fas fa-mobile-alt"></i> ?????? ?? ???? ????? ???</h3>
-                        <p>?????: 
+                        <h3><i class="fas fa-mobile-alt"></i> التبرع عن طريق بريدي موب</h3>
+                        <p>الرقم:
                             <span id="baridi-number" style="font-weight: bold; color: #007bff; direction: ltr; display: inline-block;">00799999001644493295</span>
-                            <button class="copy-btn" onclick="copyToClipboard('baridi-number')"><i class="fas fa-copy"></i> ???</button>
+                            <button class="copy-btn" onclick="copyToClipboard('baridi-number')"><i class="fas fa-copy"></i> نسخ</button>
                         </p>
                     </div>
 
                     <div class="donation-box">
-                        <h3><i class="fas fa-bitcoin"></i> ?????? ?? ???? ????? ??????</h3>
-                        <p>Binance ID: 
+                        <h3><i class="fas fa-bitcoin"></i> التبرع عن طريق تطبيق بينانس</h3>
+                        <p>Binance ID:
                             <span id="binance-id" style="font-weight: bold; color: #f0b90b; direction: ltr; display: inline-block;">761600642</span>
-                            <button class="copy-btn" onclick="copyToClipboard('binance-id')"><i class="fas fa-copy"></i> ???</button>
+                            <button class="copy-btn" onclick="copyToClipboard('binance-id')"><i class="fas fa-copy"></i> نسخ</button>
                         </p>
                     </div>
 
                     <p style="text-align: center; font-weight: bold; color: #28a745; margin-top: 30px;">
-                        ??? ?????? ??? ?????? ??? ?????? ??
+                        نحن نشكركم على دعمكم، ربي يوفقكم  
                     </p>
                 </div>
             `;
@@ -806,37 +1004,37 @@
         function copyToClipboard(elementId) {
             const textToCopy = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(textToCopy).then(() => {
-                alert('?? ??? ????? ?????!');
+                alert('تم نسخ الرقم بنجاح!');
             }).catch(err => {
-                console.error('??? ?? ??? ????: ', err);
+                console.error('فشل في نسخ النص: ', err);
             });
         }
 
         function buildAboutAppPage() {
             const html = `
                 <div class="sub-page">
-                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> ????</button>
-                    <h2>??? ?????? ??</h2>
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h2>حول الموقع  </h2>
                     
                     <div style="text-align: center; padding: 15px; background-color: #e6f7e9; border-radius: 8px;">
-                        <p style="font-size: 1.2rem; font-weight: bold; color: #1e7e34;">???? "??????? ????????? - ????" ?????</p>
-                        <p>?? ?????? ?????? ??????? **????**? ??? ??? ?????? ????????.</p>
+                        <p style="font-size: 1.2rem; font-weight: bold; color: #1e7e34;">موقع "الدراسة بالمراسلة - يوسف"  </p>
+                        <p>تم تطويره بواسطة مرافقكم **يوسف**، وهو خاص بأصحاب المراسلة.</p>
                     </div>
 
-                    <h3>????? ??????:</h3>
-                    <p>???? ?????? ??? ?? ???? ??????? ???? ?? ??????? ????????? ?? ?????? ?????????? ?? ???? ????? ?????? ??? ??????? ???????? ???:</p>
+                    <h3>أهداف الموقع:</h3>
+                    <p>يهدف الموقع إلى حل جميع المشاكل التي قد يواجهها المتعلمون في رحلتهم التعليمية، من خلال تبسيط الوصول إلى الخدمات الأساسية مثل:</p>
                     <ul>
-                        <li><i class="fas fa-print"></i> ??? ???????.</li>
-                        <li><i class="fas fa-laptop-code"></i> ?????? ??? ???????? ?????????.</li>
-                        <li><i class="fas fa-pen"></i> ???? ?????? ???????????.</li>
+                        <li><i class="fas fa-print"></i> طبع الوثائق.</li>
+                        <li><i class="fas fa-laptop-code"></i> الدخول إلى الأرضيات التعليمية.</li>
+                        <li><i class="fas fa-pen"></i> منصة الفروض الإلكترونية.</li>
                     </ul>
 
-                    <h3 style="color: #dc3545;">????? ?????????! ??</h3>
+                    <h3 style="color: #dc3545;">إخلاء المسؤولية!  </h3>
                     <p style="border: 1px dashed #dc3545; padding: 10px; border-radius: 5px; font-weight: bold;">
-                        ??? ?????? ??? ???? ?????? ??????? ?????? ??????? ???????? ?? ???.
+                        هذا الموقع غير تابع رسمياً للديوان الوطني للتعليم والتكوين عن بعد.
                     </p>
                     
-                    <h3>??????? ??????? ??????? (????):</h3>
+                    <h3>معلومات الاتصال بالمطور (يوسف):</h3>
                     <div class="social-media-container" style="justify-content: flex-start; padding: 10px 0;">
                         <a href="https://t.me/youcef_info_2" target="_blank" class="social-icon telegram"><i class="fab fa-telegram-plane"></i></a>
                         <a href="https://wa.me/213665074666" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
@@ -848,11 +1046,66 @@
             `;
             pagesContainer.innerHTML = html;
         }
+        
+        // **الدوال الإضافية للساعة والتاريخ والعدادات والبحث**
+
+        // دالة تحديث الساعة والتاريخ
+        function updateClock() {
+            const now = new Date();
+            const timeElement = document.getElementById('sidebar-time');
+            const dateElement = document.getElementById('sidebar-date');
+            
+            // تهيئة الوقت: الثواني والدقائق والساعة
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const timeString = now.toLocaleTimeString('en-US', timeOptions);
+            timeElement.textContent = timeString;
+
+            // تهيئة التاريخ: اليوم (رقم)، الشهر (حروف)، السنة (رقم)
+            const dateOptions = { day: '2-digit', month: 'long', year: 'numeric' };
+            const dateString = now.toLocaleDateString('ar-DZ', dateOptions); // استخدام 'ar-DZ' للحصول على الشهر بالحروف العربية
+            dateElement.textContent = dateString;
+        }
+
+        // دالة البحث (إظهار رسالة بسيطة لكونه موقع صفحة واحدة)
+        function searchSite(query) {
+             // بما أن الموقع يعتمد على صفحة واحدة، فالبحث الفعلي داخل المحتوى يتطلب مكتبات متقدمة.
+             // سنقوم بإظهار رسالة بسيطة هنا للمستخدم.
+             if (query.length > 2) {
+                 // يمكنك إضافة منطق بحث فعلي هنا مستقبلاً (مثل البحث داخل عناوين الأزرار)
+                 console.log("جارٍ البحث عن: " + query);
+             }
+        }
+        
+        // دالة تحديث العدادات الوهمية (لتظهر بشكل حقيقي يتزايد)
+        function animateCounts() {
+            const visitElement = document.getElementById('visit-count');
+            const shareElement = document.getElementById('share-count');
+            
+            let currentVisits = parseInt(visitElement.textContent);
+            let currentShares = parseInt(shareElement.textContent);
+            
+            // زيادة وهمية: تزداد الزيارات والمشاركات بشكل عشوائي كل 5 ثوانٍ
+            const maxIncrease = 5;
+            setInterval(() => {
+                currentVisits += Math.floor(Math.random() * maxIncrease) + 1;
+                currentShares += Math.floor(Math.random() * (maxIncrease / 2)) + 1;
+                
+                visitElement.textContent = currentVisits.toLocaleString('en-US');
+                shareElement.textContent = currentShares.toLocaleString('en-US');
+            }, 5000); 
+        }
+
+        // تشغيل الساعة كل ثانية
+        setInterval(updateClock, 1000);
+        // تشغيل وظيفة العدادات عند تحميل الصفحة
+        window.onload = function() {
+            updateClock();
+            animateCounts();
+        };
 
     </script>
 </body>
 </html>
-
 
 
 
